@@ -26,10 +26,17 @@ public class DB {
 
 	private void open() {
 		try {
+<<<<<<< HEAD
 			String dbFileName = "project1.sqlite";
 			SQLiteConfig config = new SQLiteConfig();
 			config.setEncoding(SQLiteConfig.Encoding.UTF8);
 			this.connection = DriverManager.getConnection("jdbc:sqlite:" + dbFileName, config.toProperties());
+=======
+			String dbFileName = "home/ubuntu/project1.sqlite";
+			SQLiteConfig config = new SQLiteConfig();
+			config.setEncoding(SQLiteConfig.Encoding.UTF8);
+			this.connection = DriverManager.getConnection("jdbc:sqlite:/" + dbFileName, config.toProperties());
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -46,18 +53,26 @@ public class DB {
 	// 테이블 생성
 	public void createTable() {
 		this.open();
+<<<<<<< HEAD
 		String userQuery = "CREATE TABLE user (idx INTEGER PRIMARY KEY AUTOINCREMENT, user_type TEXT, id TEXT, pwd TEXT, name TEXT, phone TEXT, address TEXT, created TEXT, last_updated TEXT);";
 		String postQuery = "CREATE TABLE post (idx INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, contents TEXT, writer TEXT, created TEXT, last_updated TEXT, title_chosung TEXT);";
 		try {
 			Statement statement = this.connection.createStatement();
 			statement.executeUpdate(userQuery);
 			statement.executeUpdate(postQuery);
+=======
+		String query = "CREATE TABLE user (idx INTEGER PRIMARY KEY AUTOINCREMENT, user_type TEXT, id TEXT, pwd TEXT, name TEXT, phone TEXT, address TEXT, created TEXT, last_updated TEXT);";
+		try {
+			Statement statement = this.connection.createStatement();
+			statement.executeQuery(query);
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 			statement.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		this.close();
 	}
+<<<<<<< HEAD
 
 	// pwd 암호화
 	public static String sha512(String input) {
@@ -79,6 +94,29 @@ public class DB {
 	}
 
 	// user 데이터 삽입
+=======
+	
+	// pwd 암호화
+	public static String sha512(String input) {
+        try {
+            // SHA-512 해시 알고리즘 사용
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] hashedBytes = md.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // 바이트 배열을 16진수 문자열로 변환
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-512 알고리즘을 사용할 수 없습니다.", e);
+        }
+    }
+	
+	// 데이터 삽입
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	public void insertData(User user) {
 		this.open();
 		String query = "INSERT INTO user (user_type, id, pwd, name, phone, address, created, last_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -101,9 +139,15 @@ public class DB {
 		}
 		this.close();
 	}
+<<<<<<< HEAD
 
 	// user 전체 조회
 	public ArrayList<User> selectAllUser() {
+=======
+	
+	// 회원 전체 조회
+	public ArrayList<User> selectAll() {
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		this.open();
 		ArrayList<User> data = new ArrayList<>();
 		try {
@@ -129,12 +173,21 @@ public class DB {
 		this.close();
 		return data;
 	}
+<<<<<<< HEAD
 
 	// user 데이터 수정
 	public void updateData(User user, int idx) {
 		this.open();
 		String query = "UPDATE user SET id=?, pwd=?, name=?, phone=?, address=?, last_updated=? WHERE idx=?";
 
+=======
+	
+	// 데이터 수정
+	public void updateData(User user, int idx) {
+		this.open();
+		String query = "UPDATE user SET id=?, pwd=?, name=?, phone=?, address=?, last_updated=? WHERE idx=?";
+		
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		try {
 			PreparedStatement statement = this.connection.prepareStatement(query);
 			statement.setString(1, user.id);
@@ -153,12 +206,21 @@ public class DB {
 		}
 		this.close();
 	}
+<<<<<<< HEAD
 
 	// user 데이터 삭제
 	public void deleteData(int idx) {
 		this.open();
 		String query = "DELETE FROM user WHERE idx=?";
 
+=======
+	
+	// 데이터 삭제
+	public void deleteData(int idx) {
+		this.open();
+		String query = "DELETE FROM user WHERE idx=?";
+		
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		try {
 			PreparedStatement statement = this.connection.prepareStatement(query);
 			statement.setInt(1, idx);
@@ -169,7 +231,11 @@ public class DB {
 		}
 		this.close();
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	// 로그인 체크
 	public User login(User user) {
 		this.open();
@@ -200,7 +266,11 @@ public class DB {
 		this.close();
 		return returnData;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	// 회원 조회
 	public User select(int idx) {
 		this.open();
@@ -228,11 +298,19 @@ public class DB {
 		this.close();
 		return data;
 	}
+<<<<<<< HEAD
 
 	// 총 회원 수 조회
 	public int countAll() {
 		this.open();
 
+=======
+	
+	// 총 회원 수 조회
+	public int countAll() {
+		this.open();
+		
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		int count = 0;
 		try {
 			String query = "SELECT count(*) AS count FROM user";
@@ -246,10 +324,17 @@ public class DB {
 			e.printStackTrace();
 		}
 		this.close();
+<<<<<<< HEAD
 
 		return count;
 	}
 
+=======
+		
+		return count;
+	}
+	
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	// 금일 가입한 회원 수 조회
 	public int countDay() {
 		this.open();
@@ -268,6 +353,7 @@ public class DB {
 			e.printStackTrace();
 		}
 		this.close();
+<<<<<<< HEAD
 
 		return count;
 	}
@@ -459,4 +545,9 @@ public class DB {
 		}
 		this.close();
 	}
+=======
+		
+		return count;
+	}
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 }

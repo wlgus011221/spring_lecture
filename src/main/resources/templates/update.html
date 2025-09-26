@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>회원정보수정</title>
+	<link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+	<div class="form-container">
+		<h1>회원 정보 수정</h1>
+		<a href="/" class="btn-link">홈으로 가기</a>
+		
+		<form action="updateAction" class="score-form" method="post">
+			<label>번호</label>
+			<input type="text" name="idx" th:value="${idx}" readonly />
+			
+			<label>아이디</label>
+			<input type="text" name="id" th:value="${id}" />
+
+			<label>비밀번호  *필수입력</label>
+			<input type="password" name="pwd" required />
+			
+			<label>이름</label>
+			<input type="text" name="name" th:value="${name}" />
+			
+			<label>전화번호</label>
+			<input type="text" name="phone" th:value="${phone}" />
+			
+			<label>주소</label>
+			<input type="text" name="address" th:value="${address}" />
+			
+			<input type="submit" value="수정 완료" class="submit-btn" />
+		</form>
+	</div>
+</body>
+</html>

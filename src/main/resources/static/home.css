@@ -6,19 +6,29 @@ body {
     display: flex;
     flex-direction: column;  /* 세로 정렬 */
     height: 100vh;
+<<<<<<< HEAD
     justify-items: center;
+=======
+    justify-content: center;
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
     align-items: center;
 }
 
 .container {
+<<<<<<< HEAD
 	width: 60%;
+=======
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
     background-color: white;
     padding: 40px 60px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-bottom: 30px; /* stats와 간격 */
+<<<<<<< HEAD
 	margin-top: 20px;
+=======
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 }
 
 h1 {
@@ -40,17 +50,24 @@ a:hover, a:visited {
     color: #345633;
 }
 
+<<<<<<< HEAD
 .stats-container{
 	display: flex;
 	justify-items: right;
 }
 
+=======
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 .stats {
     background-color: white;
     padding: 20px 40px;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+<<<<<<< HEAD
     width: 200px;
+=======
+    width: 300px;
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
     text-align: center;
     color: #4a4a4a;
     font-weight: 600;
@@ -66,6 +83,7 @@ a:hover, a:visited {
 .stats p:last-child {
     border-bottom: none;
 }
+<<<<<<< HEAD
 
 .new-post-container {
     display: grid; /* grid 방식 */
@@ -111,3 +129,5 @@ a:hover, a:visited {
 @media (max-width: 1024px) {
 
 }
+=======
+>>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
