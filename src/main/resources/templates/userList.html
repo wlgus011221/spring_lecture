@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>회원목록</title>
+	<link rel="stylesheet" href="list.css" />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.get("selectAllUser", function(data){
+				console.log(data);
+				for (let i = 0; i < data.length; i++) {
+    	    	   let row = '<tr>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].idx;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].userType;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].id;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + "****"; // 비밀번호 마스킹 처리 
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].name;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].phone;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].address;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].created;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + data[i].lastUpdated;
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + '<a href="update?idx=' + data[i].idx + '">수정</a>';
+    	    	   row = row + '</td>';
+    	    	   row = row + '<td>';
+    	    	   row = row + '<a href="delete?idx=' + data[i].idx + '">삭제</a>';
+    	    	   row = row + '</td>';
+    	    	   row = row + '</tr>';
+    	    	   $('tbody').append(row);
+    	       }
+			})
+		})
+	</script>
+</head>
+<body>
+	<div class="stat-container">
+		<h1>회원 목록</h1>
+		<a href="/" class="btn-link">홈으로 가기</a>
+		
+		<table class="user-table">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>타입</th>
+				<th>아이디</th>
+				<th>비밀번호</th>
+				<th>이름</th>
+				<th>전화번호</th>
+				<th>주소</th>
+				<th>생성일</th>
+				<th>최종 수정일</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>

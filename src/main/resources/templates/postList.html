@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>공지사항</title>
+	<link rel="stylesheet" href="postList.css" />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+		    // 기존 게시글 로드
+		    $.get("selectAllPost", function(data){
+		        renderTable(data);
+		    });
+
+		    // 검색 폼 submit 이벤트 처리
+		    $('#searchForm').submit(function(e){
+		        e.preventDefault(); // 기본 submit 막기
+		        let keyword = $('#searchInput').val().trim();
+		        if(keyword === "") return; // 빈값이면 처리 안함
+
+		        $.ajax({
+		            url: '/searchPost', // 서버에서 검색 처리할 엔드포인트
+		            type: 'GET',
+		            data: { keyword: keyword },
+		            success: function(data){
+		                $('tbody').empty(); // 기존 테이블 초기화
+		                renderTable(data);  // 검색 결과 렌더링
+		            },
+		            error: function(xhr, status, error){
+		                console.error(error);
+		            }
+		        });
+		    });
+
+		    // 테이블 렌더링 함수
+		    function renderTable(data){
+		        for(let i = 0; i < data.length; i++){
+		            let row = `<tr onclick="location.href='/postDetail?idx=${data[i].idx}'">
+		                            <td>${data[i].idx}</td>
+		                            <td>${data[i].title}</td>
+		                            <td>${data[i].writer}</td>
+		                            <td>${data[i].created}</td>
+		                            <td>${data[i].lastUpdated}</td>
+		                       </tr>`;
+		            $('tbody').append(row);
+		        }
+		    }
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h1>공지사항</h1>
+		<div class="top-bar">
+		    <div class="link-wrap">
+		        <a href="/" class="btn-link">홈으로 가기</a>
+		    </div>
+			<div class="search-container">
+			    <form id="searchForm">
+			        <input type="text" id="searchInput" placeholder="검색어 입력">
+			        <input type="submit" value="검색">
+			    </form>
+			</div>
+		</div>
+		
+		<table class="post-table">
+		<thead>
+			<tr>
+				<th>게시판 번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>수정일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 데이터 동적 추가 -->
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>

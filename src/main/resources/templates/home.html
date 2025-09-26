@@ -1,0 +1,86 @@
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="home.css" />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+		    // 최근 게시글 로드
+		    $.get("selectPostRecent", function(data){
+		        renderCard(data);
+		    });
+
+		    // 테이블 렌더링 함수
+		    function renderCard(data){
+		        for(let i = 0; i < data.length; i++){
+		            let row = `<div class="card" onclick="location.href='/postDetail?idx=${data[i].idx}'">
+								<p>${data[i].title}</p><br>
+								작성일 : ${data[i].created}
+								</div>`;
+		            $('.new-post-container').append(row);
+		        }
+		    }
+			
+			// 최근 수정 게시글 로드
+		    $.get("selectPostUpdateRecent", function(data){
+		        renderCardUpdate(data);
+		    });
+
+		    // 테이블 렌더링 함수
+		    function renderCardUpdate(data){
+		        for(let i = 0; i < data.length; i++){
+		            let row = `<div class="card" onclick="location.href='/postDetail?idx=${data[i].idx}'">
+								<p>${data[i].title}</p><br>
+								수정일 : ${data[i].lastUpdated}
+								</div>`;
+		            $('.update-post-container').append(row);
+		        }
+		    }
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h1>Home</h1>	
+		<!-- 로그인 여부에 따라 다르게 보이도록 -->
+		<th:block th:if="${loginId != null}">
+			<div class="login-info">
+		        <p>현재 로그인한 사용자: <strong th:text="${loginId}"></strong></p>
+		    </div>
+			<a th:href="@{/logout}" class="btn">로그아웃</a>
+			<a href="mypage" class="btn">마이페이지</a>
+		</th:block>
+		<th:block th:unless="${loginId != null}">
+			<a th:href="@{/login}" class="btn">로그인</a>
+			<a href="signup" class="btn">회원가입</a>
+		</th:block>
+		
+		<!-- 관리자 여부에 따라 다르게 보이도록 -->
+		<th:block th:if="${userType == 'admin'}">
+		    <a th:href="@{/list}" class="btn">회원목록</a>
+			<a th:href="@{/post}" class="btn">공지사항 작성</a>
+		</th:block>
+		
+		<a th:href="@{/postList}" class="btn">공지사항</a>
+	</div>
+	
+	<!-- 회원 수 -->
+	<div class="stats-container">
+		<div class="stats">
+	        총 회원 수 :<p th:text="${totalCount}"></p>
+	        오늘 가입한 회원 수: <p th:text="${todayCount}"></p>
+    
+		</div>
+	</div>
+	<!-- 게시글 -->
+	<h2>최근 게시글</h2>
+	<div class="new-post-container">
+		<!-- 여기에 데이터 동적 추가 -->
+	</div>
+	
+	<h2>최근 수정 게시글</h2>
+	<div class="update-post-container">
+		<!-- 여기에 데이터 동적 추가 -->
+	</div>
+</body>
+</html>

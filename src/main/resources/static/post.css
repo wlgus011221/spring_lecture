@@ -1,0 +1,88 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 600px; /* 폼 너비 고정 */
+	min-height: 500px;
+    text-align: left; /* 텍스트 정렬 변경 */
+}
+
+h1 {
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center; /* 제목은 중앙 */
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 800px;  /* 기본 높이 */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical; /* 사용자가 높이 조절 가능 */
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.btn-link {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #4285f4;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+    color: #3367d6;
+}

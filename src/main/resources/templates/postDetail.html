@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>공지사항</title>
+	<link rel="stylesheet" href="postDetail.css" />
+</head>
+<body>
+	<div class="container">
+        <a href="/postList" class="btn-link">이전으로</a>
+        <div class="card">
+            <div class="row"><span class="label">제목</span><span class="value" th:text="${title}"></span></div>
+            <div class="row"><span class="label">내용</span><span class="value" th:utext="${contents}"></span></div>
+            <hr>
+			<div class="row"><span class="label">작성자</span><span class="value" th:text="${writer}"></span></div>
+            <div class="row"><span class="label">작성일</span><span class="value" th:text="${created}"></span></div>
+            <div class="row"><span class="label">수정일</span><span class="value" th:text="${lastUpdated}"></span></div>
+        </div>
+				
+		<th:block th:if="${userType == 'admin'}">
+			<div class="button-container">
+				<a th:href="@{/updatePost(idx=${idx})}" class="edit-button">수정</a>
+	            <a th:href="@{/deletePost(idx=${idx})}" class="delete-button">삭제</a>
+			</div>
+		</th:block>
+	</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fbfc;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 상단 정렬 */
+    padding-top: 50px; /* 화면 상단 여백 */
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    min-width: 800px;
+    width: auto;
+    max-width: 75%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+    width: 100px; /* 라벨 영역 고정 */
+}
+
+.value {
+    color: #333;
+    flex: 1;
+    word-break: break-word; /* 내용 길어도 줄바꿈 */
+}
+
+.btn-link {
+    display: inline-block;
+    margin-bottom: 30px;
+    text-decoration: none;
+    color: #4285f4;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+    color: #3367d6;
+}
+
+.button-container{
+	display: flex;
+	justify-content: right;
+}
+
+.edit-button{
+	background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+	cursor: pointer;
+	padding: 5px;
+	margin-right: 10px;
+	text-decoration: none;
+}
+
+.delete-button{
+	background-color: #DD3333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+	cursor: pointer;
+	padding: 5px;
+	text-decoration: none;
+}
