@@ -1,10 +1,7 @@
 package com.kopo.project1;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -98,11 +95,7 @@ public class HomeController {
 			model.addAttribute("name", user.name);
 			model.addAttribute("phone", user.phone);
 			model.addAttribute("address", user.address);
-<<<<<<< HEAD
 			return "userUpdate";
-=======
-			return "update";
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		} catch (Exception e) {
 			model.addAttribute("text", "잘못된 접근입니다.");
 			return "message";
@@ -153,19 +146,13 @@ public class HomeController {
 			session.setAttribute("user_type", "");
 			session.removeAttribute("user_idx"); // 로그아웃 상태면 id 제거
 			session.removeAttribute("loginId"); // 로그인 실패 시 제거
-<<<<<<< HEAD
 			session.removeAttribute("loginName");
-=======
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		} else {
 			session.setAttribute("is_login", true);
 			session.setAttribute("user_type", loggedUser.userType);
 			session.setAttribute("user_idx", loggedUser.idx);
 			session.setAttribute("loginId", loggedUser.id);
-<<<<<<< HEAD
 			session.setAttribute("loginName", loggedUser.name);
-=======
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		}
 		return "redirect:/";
 	}
@@ -177,11 +164,8 @@ public class HomeController {
 	    return "redirect:/";
 	}
 	
-<<<<<<< HEAD
+
 	// 회원 목록 화면 - 관리자만
-=======
-	// 회원 목록 화면
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	@GetMapping(value = "/list")
 	public String list(Locale locale, Model model, HttpSession session) {
 		boolean isLogin = false;
@@ -192,19 +176,12 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		
 		if (isLogin && userType.equals("admin")) {
 			return "userList";
-=======
-		if (isLogin && userType.equals("admin")) {
-			return "list";
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 		}
 		return "redirect:/";
 	}
 	
-<<<<<<< HEAD
 	// 공지사항 작성 - 관리자만
 	@GetMapping(value = "/post")
 	public String post(Locale locale, Model model, HttpSession session) {
@@ -372,8 +349,6 @@ public class HomeController {
 	}
 	
 	
-=======
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 	// 마이페이지
 	@GetMapping(value = "/mypage")
 	public String mypage(Locale locale, Model model, HttpSession session) {

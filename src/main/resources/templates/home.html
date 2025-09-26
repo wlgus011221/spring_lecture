@@ -2,7 +2,6 @@
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" href="home.css" />
-<<<<<<< HEAD
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -83,44 +82,5 @@
 	<div class="update-post-container">
 		<!-- 여기에 데이터 동적 추가 -->
 	</div>
-=======
-</head>
-<body>
-	<div class="container">
-		<h1>Home</h1>
-		<a href="signup" class="btn">회원가입</a>
-		<!-- <c:choose>
-		    <c:when test="${not empty loginId}">
-		        <a href="logout" class="btn">로그아웃</a>
-		    </c:when>
-		    <c:otherwise>
-		        <a href="login" class="btn">로그인</a>
-		    </c:otherwise>
-		</c:choose> -->
-
-		<th:block th:if="${loginId != null}">
-			<a th:href="@{/logout}" class="btn">로그아웃</a>
-		</th:block>
-		<th:block th:unless="${loginId != null}">
-			<a th:href="@{/login}" class="btn">로그인</a>
-		</th:block>
-
-		<c:if test="${userType eq 'admin'}">
-		    <a href="list" class="btn">회원목록</a>
-		</c:if>
-		
-		<a href="mypage" class="btn">마이페이지</a>
-		<c:if test="${not empty loginId}">
-		    <div class="login-info">
-		        <p>현재 로그인한 사용자: <strong th:text="${loginId}"></strong></p>
-		    </div>
-		</c:if>
-		
-	</div>
-	<div class="stats">
-        총 회원 수 :<p th:text="${totalCount}"></p>
-        오늘 가입한 회원 수: <p th:text="${todayCount}"></p>
-    </div>
->>>>>>> 87ee6831d7d478bb6f1f29baefacf38b58096c83
 </body>
 </html>
