@@ -26,6 +26,14 @@
 
 			<input type="submit" value="작성" class="submit-btn">
 		</form>
+		
+		<hr>
+		<h3>엑셀 업로드</h3>
+		<form action="excelUpload" method="post" enctype="multipart/form-data">
+			<label>파일 선택</label>
+			<input type="file" name="file" accept=".xls,.xlsx" required>
+			<input type="submit" value="업로드" class="btn btn-primary">
+		</form>
 	</div>
 </body>
 </html>

@@ -306,11 +306,12 @@ public class DB {
 			while (result.next()) {
 				int idx = result.getInt("idx");
 				String title = result.getString("title");
+				String contents = result.getString("contents");
 				String writer = result.getString("writer");
 				String created = result.getString("created");
 				String lastUpdated = result.getString("last_updated");
 				String titleChosung = result.getString("title_chosung");
-				data.add(new Post(idx, title, writer, created, lastUpdated, titleChosung));
+				data.add(new Post(idx, title, contents, writer, created, lastUpdated, titleChosung));
 			}
 			statement.close();
 		} catch (Exception e) {

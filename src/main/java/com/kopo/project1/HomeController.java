@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -348,6 +355,90 @@ public class HomeController {
 //		return data;
 	}
 	
+	@GetMapping("/downloadExcel")
+	public void createExcel(Locale locale, HttpServletResponse response) {
+		try (Workbook workbook = new XSSFWorkbook()) {
+			Sheet sheet = workbook.createSheet("게시글");
+
+			DB db = new DB();
+			ArrayList<Post> postList = db.selectAllPost();
+			
+			// 헤더 행 생성
+	        Row header = sheet.createRow(0);
+	        header.createCell(0).setCellValue("ID");
+	        header.createCell(1).setCellValue("제목");
+	        header.createCell(2).setCellValue("내용");
+	        header.createCell(3).setCellValue("작성자");
+	        header.createCell(4).setCellValue("작성일");
+	        header.createCell(5).setCellValue("수정일");
+
+	        // 데이터 행 생성
+	        for (int i = 0; i < postList.size(); i++) {
+	            Post post = postList.get(i);
+	            Row row = sheet.createRow(i + 1); // 헤더 다음 행부터
+
+	            row.createCell(0).setCellValue(post.getIdx());
+	            row.createCell(1).setCellValue(post.getTitle());
+	            row.createCell(2).setCellValue(post.getContents());
+	            row.createCell(3).setCellValue(post.getWriter());
+	            row.createCell(4).setCellValue(post.getCreated().toString());
+	            row.createCell(5).setCellValue(post.getLastUpdated().toString());
+	        }
+
+	        // 파일명 UTF-8 인코딩
+	        String fileName = "게시글.xlsx";
+	        String encodedFileName = java.net.URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+
+	        // 응답 설정
+	        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	        response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodedFileName);
+
+	        // 엑셀 출력
+	        workbook.write(response.getOutputStream());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
+	@PostMapping("/excelUpload")
+	public String excelUpload(@RequestParam("file") MultipartFile file, Model model, HttpSession session) {
+	    try {
+	        Workbook workbook = WorkbookFactory.create(file.getInputStream());
+	        Sheet sheet = workbook.getSheetAt(0);
+
+	        DB db = new DB(); 
+
+	        // 현재 로그인한 유저 가져오기
+	        Integer userIdx = (Integer) session.getAttribute("user_idx"); // Changed
+	        String writer = "guest";
+	        if (userIdx != null) {
+	            User user = db.select(userIdx); // DB에서 유저 조회
+	            if (user != null) {
+	                writer = user.name;
+	            }
+	        }
+	        
+	        for (int i = 1; i <= sheet.getLastRowNum(); i++) { // 0번은 헤더라고 가정
+	            Row row = sheet.getRow(i);
+	            if (row == null) continue;
+
+	            String title = row.getCell(0).getStringCellValue();
+	            String contents = row.getCell(1).getStringCellValue();
+
+	            Post post = new Post(title, contents, writer, getChosung(title));
+	            db.insertData(post);
+	        }
+
+	        workbook.close();
+	        model.addAttribute("text", "등록 완료");
+			
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("text", "엑셀 업로드 실패: " + e.getMessage());
+	    }
+	    return "message";
+	}
 	
 	// 마이페이지
 	@GetMapping(value = "/mypage")
